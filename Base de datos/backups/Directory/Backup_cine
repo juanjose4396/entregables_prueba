@@ -1,0 +1,468 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.6.5
+-- Dumped by pg_dump version 9.6.5
+
+-- Started on 2018-01-22 10:15:47
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 7 (class 2615 OID 24987)
+-- Name: cine; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA cine;
+
+
+ALTER SCHEMA cine OWNER TO postgres;
+
+--
+-- TOC entry 1 (class 3079 OID 12387)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2174 (class 0 OID 0)
+-- Dependencies: 1
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = cine, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 190 (class 1259 OID 25059)
+-- Name: boletas; Type: TABLE; Schema: cine; Owner: postgres
+--
+
+CREATE TABLE boletas (
+    id bigint NOT NULL,
+    usuario_fk bigint,
+    pelicula_fk bigint,
+    silla_fk bigint,
+    tipo character varying(10),
+    fecha date
+);
+
+
+ALTER TABLE boletas OWNER TO postgres;
+
+--
+-- TOC entry 192 (class 1259 OID 25066)
+-- Name: boletas_id_seq; Type: SEQUENCE; Schema: cine; Owner: postgres
+--
+
+CREATE SEQUENCE boletas_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 0
+    MAXVALUE 999999999999999999
+    CACHE 1;
+
+
+ALTER TABLE boletas_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 188 (class 1259 OID 25049)
+-- Name: peliculas; Type: TABLE; Schema: cine; Owner: postgres
+--
+
+CREATE TABLE peliculas (
+    id bigint NOT NULL,
+    fecha date,
+    nombre character varying(200),
+    descripcion text,
+    url text,
+    precio integer
+);
+
+
+ALTER TABLE peliculas OWNER TO postgres;
+
+--
+-- TOC entry 195 (class 1259 OID 25072)
+-- Name: peliculas_id_seq; Type: SEQUENCE; Schema: cine; Owner: postgres
+--
+
+CREATE SEQUENCE peliculas_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 0
+    MAXVALUE 999999999999999999
+    CACHE 1;
+
+
+ALTER TABLE peliculas_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 187 (class 1259 OID 25044)
+-- Name: roles; Type: TABLE; Schema: cine; Owner: postgres
+--
+
+CREATE TABLE roles (
+    id bigint NOT NULL,
+    nombre character varying(20)
+);
+
+
+ALTER TABLE roles OWNER TO postgres;
+
+--
+-- TOC entry 193 (class 1259 OID 25068)
+-- Name: roles_id_seq; Type: SEQUENCE; Schema: cine; Owner: postgres
+--
+
+CREATE SEQUENCE roles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 0
+    MAXVALUE 999999999999999999
+    CACHE 1;
+
+
+ALTER TABLE roles_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 189 (class 1259 OID 25054)
+-- Name: sillas; Type: TABLE; Schema: cine; Owner: postgres
+--
+
+CREATE TABLE sillas (
+    id bigint NOT NULL,
+    ubicacion character varying(10)
+);
+
+
+ALTER TABLE sillas OWNER TO postgres;
+
+--
+-- TOC entry 194 (class 1259 OID 25070)
+-- Name: sillas_id_seq; Type: SEQUENCE; Schema: cine; Owner: postgres
+--
+
+CREATE SEQUENCE sillas_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 0
+    MAXVALUE 999999999999999999
+    CACHE 1;
+
+
+ALTER TABLE sillas_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 186 (class 1259 OID 25039)
+-- Name: usuarios; Type: TABLE; Schema: cine; Owner: postgres
+--
+
+CREATE TABLE usuarios (
+    id bigint NOT NULL,
+    email character varying(150),
+    password character varying(15),
+    rol_fk bigint
+);
+
+
+ALTER TABLE usuarios OWNER TO postgres;
+
+--
+-- TOC entry 191 (class 1259 OID 25064)
+-- Name: usuarios_id_seq; Type: SEQUENCE; Schema: cine; Owner: postgres
+--
+
+CREATE SEQUENCE usuarios_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 0
+    MAXVALUE 999999999999999999
+    CACHE 1;
+
+
+ALTER TABLE usuarios_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2162 (class 0 OID 25059)
+-- Dependencies: 190
+-- Data for Name: boletas; Type: TABLE DATA; Schema: cine; Owner: postgres
+--
+
+COPY boletas (id, usuario_fk, pelicula_fk, silla_fk, tipo, fecha) FROM stdin;
+10	1	1	7	3D	2018-01-19
+11	1	1	4	2D	2018-01-19
+12	1	1	5	2D	2018-01-19
+13	1	1	15	2D	2018-01-19
+14	1	1	9	3D	2018-01-19
+15	1	1	15	3D	2018-01-19
+16	1	1	26	2D	2018-01-19
+17	1	1	27	2D	2018-01-19
+18	1	2	2	2D	2018-01-19
+9	1	1	1	3D	2018-01-19
+19	1	2	22	2D	2018-01-19
+20	1	2	34	2D	2018-01-19
+21	1	2	18	2D	2018-01-19
+22	1	2	27	2D	2018-01-19
+23	1	2	37	2D	2018-01-19
+24	1	3	1	2D	2018-01-20
+25	3	1	45	2D	2018-01-17
+26	3	2	46	2D	2018-01-17
+27	3	2	47	2D	2018-01-17
+\.
+
+
+--
+-- TOC entry 2175 (class 0 OID 0)
+-- Dependencies: 192
+-- Name: boletas_id_seq; Type: SEQUENCE SET; Schema: cine; Owner: postgres
+--
+
+SELECT pg_catalog.setval('boletas_id_seq', 27, true);
+
+
+--
+-- TOC entry 2160 (class 0 OID 25049)
+-- Dependencies: 188
+-- Data for Name: peliculas; Type: TABLE DATA; Schema: cine; Owner: postgres
+--
+
+COPY peliculas (id, fecha, nombre, descripcion, url, precio) FROM stdin;
+2	2018-01-18	Stewart	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend ante dui, sed elementum nunc porta ac. Nulla facilisi. Nunc ac risus consequat, consequat tellus eget, interdum nibh. Curabitur at.	https://xombitgames.com/files/2012/04/messengers-700x400.jpg	5000
+1	2018-01-18	The vault	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend ante dui, sed elementum nunc porta ac. Nulla facilisi. Nunc ac risus consequat, consequat tellus eget, interdum nibh. Curabitur at.	https://i1.wp.com/labuenanueva.ca/lasbuenanuevas/wp-content/uploads/2016/08/El-poder-de-la-Cruz.jpg?fit=700%2C400	5000
+4	2018-01-18	Civil war	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend ante dui, sed elementum nunc porta ac. Nulla facilisi. Nunc ac risus consequat, consequat tellus eget, interdum nibh. Curabitur at.	http://descargasdev.com/wp-content/uploads/2017/11/captain_america_civil_war_5k_hd-wide-700x400.jpg	5000
+3	2018-01-18	Train to busan	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend ante dui, sed elementum nunc porta ac. Nulla facilisi. Nunc ac risus consequat, consequat tellus eget, interdum nibh. Curabitur at.	https://cdn-images-1.medium.com/max/700/1*4wj_jaqlHhms_H7TURaJpw.jpeg	5000
+6	2018-01-18	Life	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend ante dui, sed elementum nunc porta ac. Nulla facilisi. Nunc ac risus consequat, consequat tellus eget, interdum nibh. Curabitur at.	https://www.elpaisdelosjovenes.com/wp-content/uploads/2017/03/estreno-life-en-guatemala-pelicula.jpg	5000
+5	2018-01-18	Deadpool 2	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend ante dui, sed elementum nunc porta ac. Nulla facilisi. Nunc ac risus consequat, consequat tellus eget, interdum nibh. Curabitur at.	http://cdn.chapintv.com/files/2017/12/27/deadpool-2-RedLanComics.jpg	5000
+8	2018-01-18	Warcraft	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend ante dui, sed elementum nunc porta ac. Nulla facilisi. Nunc ac risus consequat, consequat tellus eget, interdum nibh. Curabitur at.	https://xombit.com/files/2016/06/Warcraft-Pelcula-700x400.jpg	5000
+7	2018-01-18	Downton Abbey	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend ante dui, sed elementum nunc porta ac. Nulla facilisi. Nunc ac risus consequat, consequat tellus eget, interdum nibh. Curabitur at.	http://www.bolsamania.com/seriesadictos/wp-content/uploads/2015/12/1DOWNTONAB-700x400.jpg	5000
+\.
+
+
+--
+-- TOC entry 2176 (class 0 OID 0)
+-- Dependencies: 195
+-- Name: peliculas_id_seq; Type: SEQUENCE SET; Schema: cine; Owner: postgres
+--
+
+SELECT pg_catalog.setval('peliculas_id_seq', 1, false);
+
+
+--
+-- TOC entry 2159 (class 0 OID 25044)
+-- Dependencies: 187
+-- Data for Name: roles; Type: TABLE DATA; Schema: cine; Owner: postgres
+--
+
+COPY roles (id, nombre) FROM stdin;
+1	usuario
+2	administrador
+3	supervisor
+4	taquilla
+\.
+
+
+--
+-- TOC entry 2177 (class 0 OID 0)
+-- Dependencies: 193
+-- Name: roles_id_seq; Type: SEQUENCE SET; Schema: cine; Owner: postgres
+--
+
+SELECT pg_catalog.setval('roles_id_seq', 1, false);
+
+
+--
+-- TOC entry 2161 (class 0 OID 25054)
+-- Dependencies: 189
+-- Data for Name: sillas; Type: TABLE DATA; Schema: cine; Owner: postgres
+--
+
+COPY sillas (id, ubicacion) FROM stdin;
+2	A-02
+1	A-01
+4	A-04
+3	A-03
+6	A-06
+5	A-05
+8	A-08
+7	A-07
+9	A-09
+43	E-03
+49	E-09
+44	E-04
+50	E-10
+25	C-05
+26	C-06
+27	C-07
+28	C-08
+21	C-01
+22	C-02
+23	C-03
+24	C-04
+47	E-07
+48	E-08
+45	E-05
+46	E-06
+29	C-09
+30	C-10
+41	E-01
+42	E-02
+10	A-10
+40	D-10
+39	D-09
+12	B-02
+11	B-01
+14	B-04
+13	B-03
+16	B-06
+15	B-05
+18	B-08
+17	B-07
+20	B-10
+19	B-09
+32	D-02
+31	D-01
+38	D-08
+37	D-07
+36	D-06
+35	D-05
+34	D-04
+33	D-03
+\.
+
+
+--
+-- TOC entry 2178 (class 0 OID 0)
+-- Dependencies: 194
+-- Name: sillas_id_seq; Type: SEQUENCE SET; Schema: cine; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sillas_id_seq', 1, false);
+
+
+--
+-- TOC entry 2158 (class 0 OID 25039)
+-- Dependencies: 186
+-- Data for Name: usuarios; Type: TABLE DATA; Schema: cine; Owner: postgres
+--
+
+COPY usuarios (id, email, password, rol_fk) FROM stdin;
+1	juan@gmail.com	123456	1
+2	paula@gmail.com	12345	2
+3	andres@gmail.com	98765	3
+4	carlos@gmail.com	142536	4
+\.
+
+
+--
+-- TOC entry 2179 (class 0 OID 0)
+-- Dependencies: 191
+-- Name: usuarios_id_seq; Type: SEQUENCE SET; Schema: cine; Owner: postgres
+--
+
+SELECT pg_catalog.setval('usuarios_id_seq', 1, false);
+
+
+--
+-- TOC entry 2036 (class 2606 OID 25063)
+-- Name: boletas boletas_key; Type: CONSTRAINT; Schema: cine; Owner: postgres
+--
+
+ALTER TABLE ONLY boletas
+    ADD CONSTRAINT boletas_key PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2032 (class 2606 OID 25053)
+-- Name: peliculas peliculas_key; Type: CONSTRAINT; Schema: cine; Owner: postgres
+--
+
+ALTER TABLE ONLY peliculas
+    ADD CONSTRAINT peliculas_key PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2030 (class 2606 OID 25048)
+-- Name: roles roles_key; Type: CONSTRAINT; Schema: cine; Owner: postgres
+--
+
+ALTER TABLE ONLY roles
+    ADD CONSTRAINT roles_key PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2034 (class 2606 OID 25058)
+-- Name: sillas sillas_key; Type: CONSTRAINT; Schema: cine; Owner: postgres
+--
+
+ALTER TABLE ONLY sillas
+    ADD CONSTRAINT sillas_key PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2028 (class 2606 OID 25043)
+-- Name: usuarios usuario_key; Type: CONSTRAINT; Schema: cine; Owner: postgres
+--
+
+ALTER TABLE ONLY usuarios
+    ADD CONSTRAINT usuario_key PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2040 (class 2606 OID 25089)
+-- Name: boletas boleta_pelicula_fk; Type: FK CONSTRAINT; Schema: cine; Owner: postgres
+--
+
+ALTER TABLE ONLY boletas
+    ADD CONSTRAINT boleta_pelicula_fk FOREIGN KEY (pelicula_fk) REFERENCES peliculas(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2039 (class 2606 OID 25084)
+-- Name: boletas boleta_silla_fk; Type: FK CONSTRAINT; Schema: cine; Owner: postgres
+--
+
+ALTER TABLE ONLY boletas
+    ADD CONSTRAINT boleta_silla_fk FOREIGN KEY (silla_fk) REFERENCES sillas(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2038 (class 2606 OID 25079)
+-- Name: boletas boleta_usuario_fk; Type: FK CONSTRAINT; Schema: cine; Owner: postgres
+--
+
+ALTER TABLE ONLY boletas
+    ADD CONSTRAINT boleta_usuario_fk FOREIGN KEY (usuario_fk) REFERENCES usuarios(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2037 (class 2606 OID 25074)
+-- Name: usuarios usuario_rol_fk; Type: FK CONSTRAINT; Schema: cine; Owner: postgres
+--
+
+ALTER TABLE ONLY usuarios
+    ADD CONSTRAINT usuario_rol_fk FOREIGN KEY (rol_fk) REFERENCES roles(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+-- Completed on 2018-01-22 10:15:48
+
+--
+-- PostgreSQL database dump complete
+--
+
